@@ -8,14 +8,15 @@
 #include "calculate.h" //*********In this file there is the procedure to calculate the results of the systems**********************
 #include "calculate.c"
   
- 
+//void readfile(int*,float[], float[],float[],int[][10],int[][10],int[][10],int[][10]);
+//void calculate(int*,float[], float[],float[],int[][10],int[][10],int[][10],int[][10]);
 
 //******************With this function the setting table has written on the screen*******************************
 
 void table(int np,int n,float settings[],int typpot[][np],int whoactionbeg[][np],int whoactionend[][np],int begintime[][np],int endtime[][np],int fixed[],double zeroset[],int begif[][np], int endif[][np], int begintif[][np], int endintif[][np], double distif[][np],int **connectactive,double **lengthconnectactive,int preypredator[])
 {
 int i,j;
- 
+printf("POTENZIALE"); 
 
 for (i=1;i<=n;i++)
 {
@@ -184,7 +185,7 @@ for (i=0;i<=n;i++)
     zeroset[i]=0;
     preypredator[i]=-1;
 }
- 
+printf("minimi begin %f",minimi[0]);  
 
 for (i=0;i<=n;i++)
 {

@@ -9,10 +9,10 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 {
  
      
- 	int h,contatore,casual,number,w,contaprob,dd,o,ff,contatoreif,metriconif,ibeg,entif,contdim,nnn,l,kk,nomove,ii,memgredyent,parbrob;	
+ 	int h,contatore,casual,number,w,contaprob,dd,o,ff,contatoreif,metriconif,ibeg,entif,contdim,nnn,l,kk,nomove,ii,memgredyent;	
 	char row[40],row2[40],namefile[40],stringnumb[40],stringa[40];
 	float distx,distmem,distx2,distmem2,term,metricx,metricx2,vincdist,vincpar,incvinc,numrow,minimal2;
-    double somprob,probtot,probsce,probnow,probafter,flotcasual,risnow,risafter,distvirt,cutoff,distcut,distcut2,num[20],param[(int)dim+1],memvinc[(int)dim+1],coef[20],vinc[10],xold[n+1][10],minimal,vincminimal,metricaconif,adj,distconnectactive,geodeticvers[20],divisorgeodetic;
+    double somprob,probtot,probsce,probnow,probafter,flotcasual,risnow,risafter,distvirt,cutoff,distcut,distcut2,num[20],param[(int)dim+1],memvinc[(int)dim+1],coef[20],vinc[10],xold[n+1][10],minimal,vincminimal,metricaconif,adj,distconnectactive,geodeticvers[20],divisorgeodetic,ptot;
 
     FILE *f20 = fopen("posprob.aut","a");
 	FILE *f30 = fopen("movtable.aut","a");
@@ -41,6 +41,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 	distmem2=100000000000;
    
     
+//	printf("nelemento %d",v); 
 //******************************************************************************************
 //************************inizio la scelta dei potenziali***********************************
 //******************************************************************************************
@@ -85,7 +86,8 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
    			cutoff=atof(row);
    			distcut=0;
    			distcut2=0;
-  		for (w=1;w<=dim;w++)
+   		//	printf("cutoff %f",cutoff);
+ 		for (w=1;w<=dim;w++)
 		{
 
 			risnow=risnow+param[w]*(x[v][w]-x[h][w])*(x[v][w]-x[h][w]);
@@ -108,7 +110,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
         }
         if (preypredator[h]!=0)
 		{
-		    if (settings[13]!=4)
+		    if (settings[13]!=1000)
 		    {
 			
 	 		prob[0]=prob[0]+probnow;
@@ -186,7 +188,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
         }
         if (preypredator[h]!=0)
 		{
-		    if (settings[13]!=4)
+		    if (settings[13]!=1000)
 		    {
 			
 	 		prob[0]=prob[0]+probnow;
@@ -263,7 +265,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
         }
         if (preypredator[h]!=0)
 		{
-		    if (settings[13]!=4)
+		    if (settings[13]!=1000)
 		    {
 			
 	 		prob[0]=prob[0]+probnow;
@@ -345,7 +347,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 
         if (preypredator[h]!=0)
 		{
-		    if (settings[13]!=4)
+		    if (settings[13]!=1000)
 		    {
 			
 	 		prob[0]=prob[0]+probnow;
@@ -366,6 +368,8 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 	 		 }
  	 			
 			 }
+		
+
      	 }
 
   		}	
@@ -429,7 +433,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
         }
         if (preypredator[h]!=0)
 		{
-		    if (settings[13]!=4)
+		    if (settings[13]!=1000)
 		    {
 			
 	 		prob[0]=prob[0]+probnow;
@@ -450,6 +454,8 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 	 		 }
 	 			
 			 }
+		
+
      	 }
 
 		}	
@@ -511,7 +517,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
         }
          if (preypredator[h]!=0)
 		{
-		    if (settings[13]!=4)
+		    if (settings[13]!=1000)
 		    {
 			
 	 		prob[0]=prob[0]+probnow;
@@ -602,7 +608,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
         }
         if (preypredator[h]!=0)
 		{
-		    if (settings[13]!=4)
+		    if (settings[13]!=1000)
 		    {
 			
 	 		prob[0]=prob[0]+probnow;
@@ -682,7 +688,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
         }
          if (preypredator[h]!=0)
 		{
-		    if (settings[13]!=4)
+		    if (settings[13]!=1000)
 		    {
 			
 	 		prob[0]=prob[0]+probnow;
@@ -710,6 +716,245 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
         }
 		fclose(f40);		
 	}// fine potmem4 (x/x**2+1)	
+
+	if ((typpot[h][contatore]<=-801) && (typpot[h][contatore]>-900))  
+	{
+ 		FILE *f40 = fopen("potmem9.aut","r");
+ 		row[0]='q';
+		risnow=0;
+		risafter=0;
+		while (row[0]!='*')
+		{
+		fscanf(f40,"%s",row);
+ 
+		while ((row[0]!='P') && (row[0]!='*'))
+		{
+			fscanf(f40,"%s",row);
+ 		}
+		fscanf(f40,"%s",row);
+ 
+		number=atoi(row)*(-1);
+ 		if (number==typpot[h][contatore])
+		{
+		for(w=0;w<=dim;w++)
+		{
+			fscanf(f40,"%s",row);
+			param[w]=atof(row);
+		}					
+			fscanf(f40,"%s",row);
+   			cutoff=atof(row);
+   			distcut=0;
+   			distcut2=0;
+   		//	printf("cutoff %f",cutoff);
+ 		for (w=1;w<=dim;w++)
+		{
+
+			risnow=risnow+param[w]*(x[v][w]-x[h][w])*(x[v][w]-x[h][w]);
+			risafter=risafter+param[w]*(xmov[z][w]-x[h][w])*(xmov[z][w]-x[h][w]);			
+            distcut=distcut+(xmov[z][w]-x[h][w])*(xmov[z][w]-x[h][w]);
+            distcut2=distcut2+(x[v][w]-x[h][w])*(x[v][w]-x[h][w]);
+            
+            
+		}
+   		distcut=sqrt(distcut);
+        distcut2=sqrt(distcut2);
+		probnow=param[0]*exp((risnow-(int)risafter)*2*3.1416)*sin(risnow);
+		probafter=param[0]*exp((risafter-(int)risafter)*2*3.1416)*sin(risafter);
+        if (cutoff<distcut) probafter=0.000000000000001;
+        if (cutoff<distcut2) probnow=0.000000000000001;
+        if (settings[16]>0)
+        {
+        if ((distcut2>cutoff) && (distcut<cutoff)) probafter=0.000000000000001;
+        if ((distcut2<cutoff) && (distcut>cutoff)) probafter=param[0]*exp((risafter-(int)risafter)*2*3.1416)*sin(risafter);
+        }
+        if (preypredator[h]!=0)
+		{
+		    if (settings[13]!=1000)
+		    {
+			
+	 		prob[0]=prob[0]+probnow;
+	 		prob[z]=prob[z]+probafter;
+	 	   }
+	 		if (settings[13]==4)
+	 		{
+				if (prob[0]==0)
+				{
+					prob[0]=probnow;
+				}
+					
+	 			if ((prob[0]!=0) && (probnow<prob[0]))
+				 {
+				   
+				 memgredyent=h;
+				 prob[0]=probnow;
+	 		 }
+			 }
+		
+ 	 }
+    }  
+ 	}
+  	fclose(f40);	
+	}// fine potmem1 (guassian wave)
+
+	if ((typpot[h][contatore]<=-901) && (typpot[h][contatore]>-1000))  
+	{
+ 		FILE *f40 = fopen("potmem10.aut","r");
+ 		row[0]='q';
+		risnow=0;
+		risafter=0;
+		while (row[0]!='*')
+		{
+		fscanf(f40,"%s",row);
+ 
+		while ((row[0]!='P') && (row[0]!='*'))
+		{
+			fscanf(f40,"%s",row);
+ 		}
+		fscanf(f40,"%s",row);
+ 
+		number=atoi(row)*(-1);
+ 		if (number==typpot[h][contatore])
+		{
+		for(w=0;w<=dim;w++)
+		{
+			fscanf(f40,"%s",row);
+			param[w]=atof(row);
+		}					
+			fscanf(f40,"%s",row);
+   			cutoff=atof(row);
+   			distcut=0;
+   			distcut2=0;
+   		//	printf("cutoff %f",cutoff);
+ 		for (w=1;w<=dim;w++)
+		{
+
+			risnow=risnow+param[w]*(x[v][w]-x[h][w])*(x[v][w]-x[h][w]);
+			risafter=risafter+param[w]*(xmov[z][w]-x[h][w])*(xmov[z][w]-x[h][w]);			
+            distcut=distcut+(xmov[z][w]-x[h][w])*(xmov[z][w]-x[h][w]);
+            distcut2=distcut2+(x[v][w]-x[h][w])*(x[v][w]-x[h][w]);
+            
+            
+		}
+   		distcut=sqrt(distcut);
+        distcut2=sqrt(distcut2);
+		probnow=param[0]*exp(-risnow)*risnow;
+		probafter=param[0]*exp(-risafter)*risafter;
+        if (cutoff<distcut) probafter=0.000000000000001;
+        if (cutoff<distcut2) probnow=0.000000000000001;
+        if (settings[16]>0)
+        {
+        if ((distcut2>cutoff) && (distcut<cutoff)) probafter=0.000000000000001;
+        if ((distcut2<cutoff) && (distcut>cutoff)) probafter=param[0]*exp(-risafter)*risafter;
+        }
+        if (preypredator[h]!=0)
+		{
+		    if (settings[13]!=1000)
+		    {
+			
+	 		prob[0]=prob[0]+probnow;
+	 		prob[z]=prob[z]+probafter;
+	 	   }
+	 		if (settings[13]==4)
+	 		{
+				if (prob[0]==0)
+				{
+					prob[0]=probnow;
+				}
+					
+	 			if ((prob[0]!=0) && (probnow<prob[0]))
+				 {
+				   
+				 memgredyent=h;
+				 prob[0]=probnow;
+	 		 }
+			 }
+		
+ 	 }
+    }  
+ 	}
+  	fclose(f40);	
+	}// fine potmem1 (x2e-x2)
+	if ((typpot[h][contatore]<=-1001) && (typpot[h][contatore]>-1100))  
+	{
+ 		FILE *f40 = fopen("potmem11.aut","r");
+ 		row[0]='q';
+		risnow=0;
+		risafter=0;
+		while (row[0]!='*')
+		{
+		fscanf(f40,"%s",row);
+ 
+		while ((row[0]!='P') && (row[0]!='*'))
+		{
+			fscanf(f40,"%s",row);
+ 		}
+		fscanf(f40,"%s",row);
+ 
+		number=atoi(row)*(-1);
+ 		if (number==typpot[h][contatore])
+		{
+		for(w=0;w<=dim;w++)
+		{
+			fscanf(f40,"%s",row);
+			param[w]=atof(row);
+		}					
+			fscanf(f40,"%s",row);
+   			cutoff=atof(row);
+   			distcut=0;
+   			distcut2=0;
+   		//	printf("cutoff %f",cutoff);
+ 		for (w=1;w<=dim;w++)
+		{
+
+			risnow=risnow+param[w]*(x[v][w]-x[h][w])*(x[v][w]-x[h][w]);
+			risafter=risafter+param[w]*(xmov[z][w]-x[h][w])*(xmov[z][w]-x[h][w]);			
+            distcut=distcut+(xmov[z][w]-x[h][w])*(xmov[z][w]-x[h][w]);
+            distcut2=distcut2+(x[v][w]-x[h][w])*(x[v][w]-x[h][w]);
+            
+            
+		}
+   		distcut=sqrt(distcut);
+        distcut2=sqrt(distcut2);
+		probnow=param[0]*exp(-risnow)*risnow*risnow;
+		probafter=param[0]*exp(-risafter)*risafter*risafter;
+        if (cutoff<distcut) probafter=0.000000000000001;
+        if (cutoff<distcut2) probnow=0.000000000000001;
+        if (settings[16]>0)
+        {
+        if ((distcut2>cutoff) && (distcut<cutoff)) probafter=0.000000000000001;
+        if ((distcut2<cutoff) && (distcut>cutoff)) probafter=param[0]*exp(-risafter)*risafter*risafter;
+        }
+        if (preypredator[h]!=0)
+		{
+		    if (settings[13]!=1000)
+		    {
+			
+	 		prob[0]=prob[0]+probnow;
+	 		prob[z]=prob[z]+probafter;
+	 	   }
+	 		if (settings[13]==4)
+	 		{
+				if (prob[0]==0)
+				{
+					prob[0]=probnow;
+				}
+					
+	 			if ((prob[0]!=0) && (probnow<prob[0]))
+				 {
+				   
+				 memgredyent=h;
+				 prob[0]=probnow;
+	 		 }
+			 }
+		
+ 	 }
+    }  
+ 	}
+  	fclose(f40);	
+	}// fine potmem1 (x4e-x2)
+
+
+
 //*****************************************************************************
 //******************potenziale da caricare tramite file************************
 //*****************************************************************************
@@ -796,7 +1041,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
               			        }
         if (preypredator[h]!=0)
 		{
-		    if (settings[13]!=4)
+		    if (settings[13]!=1000)
 		    {
 			
 	 		prob[0]=prob[0]+probnow;
@@ -838,7 +1083,8 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
     }                    
     if (connectactive[v][h]>0) 
     {
- 
+ //    printf("connect[8] %d",connectactive[1][8]);
+
      distconnectactive=0;
      for (w=1;w<=dim;w++)
      {
@@ -849,6 +1095,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
      if (distconnectactive<lengthconnectactive[v][h]) 
      {
          connectactive[v][h]--;
+      //   printf ("connectactive %f",connectactive[v][h]);
      }
      }
 
@@ -859,6 +1106,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
         if (settings[15]>0)
         {
            prob[0]=0.0000000001;
+           if (settings[13]==2) prob[0]=10000000000000000;
            }  
 //*************************settings[9] è il numero di possibili scelte************************ 
 		if (z==settings[9])
@@ -876,7 +1124,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 			}
 		}
 		// mettere opzione parti dal minimo assoluto//***********
-//****************** entra solo se ha considerato tutti i passi dati nel MAIN**************
+//****************** entra solo se ha consideratiìo tutti i passi dati nel MAIN**************
  		somprob=0;
         if (settings[12]==4) adj=zeroset[v];
         if (settings[12]!=4) adj=0;
@@ -922,9 +1170,9 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 }
  	if (1==1) 
 	{
- 		casual=rand()%100;
-		flotcasual=casual*somprob/100.0;
-		if (flotcasual==0) flotcasual=0.001*somprob/100.0;
+ 		casual=rand()%1000;
+		flotcasual=casual*somprob/1000.0;
+		if (flotcasual==0) flotcasual=0.001*somprob/1000.0;
  		probsce=0;
 		contaprob=-1;
      	//*******pezzo salva min prob**********
@@ -1040,11 +1288,67 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 			}	
 		 
 		}		
- 		
-		if ((settings[13]==4) && (memgredyent<=n))
+		//	printf("memgredyent %d",memgredyent);
+		
+//***************************modalita media*******************************
+//**************************************************************************
+		if (settings[13]==4) 
+		{
+  		for (l=0;l<=settings[9];l++)
+		{
+		ptot=ptot+prob[l];
+		}
+		ptot=ptot/settings[9];
+		
+	//	printf("vediamo un ptot %f and settings %f",ptot,settings[9]);
+		minimal=100000000000000000;
+ 		for (l=0;l<=settings[9];l++)
+		{
+		if (abs(ptot-prob[l])<minimal)
+		{
+			nnn=l;
+			minimal=abs(ptot-prob[l]);
+		}
+		}
+		
+				
+ 		for (w=1;w<=dim;w++)
+        {
+				if (settings[11]!=0)
+				{
+				distvirt=0;
+				for (o=1;o<=dim;o++)
+				{
+					distvirt=distvirt+(xmov[nnn][o])*(xmov[nnn][o]);
+					} 
+				distvirt=sqrt(distvirt);
+				if (distvirt<settings[11])
+				{
+					if (nnn>=0)
+					{
+						x[v][w]=xmov[nnn][w];
+					}
+				}	 
+			}
+			if (settings[11]==0)
+			{
+				if (nnn>=0)
+				{
+					x[v][w]=xmov[nnn][w];
+				}	
+			}
+			}	
+		 
+		}		
+
+		if ((settings[13]==10000) && (memgredyent<=n))
 	    {
 			//calcolare distanza gredy e versore spostamento
-        		
+ 			printf("qui va bene %d",v);
+			printf("settings %f",settings[3]);
+			printf("divisorgeodetic %f",divisorgeodetic);
+			printf("memgredyent %d",memgredyent);
+       		
         divisorgeodetic=0;
 
   		for (w=1;w<=dim;w++)
@@ -1062,6 +1366,7 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 		}
 		divisorgeodetic=sqrt(divisorgeodetic);
   		
+	//	divisorgeodetic=divisorgeodetic/settings[3];
  
   		for (w=1;w<=dim;w++)
         {
@@ -1171,7 +1476,8 @@ FILE *f4 = fopen("posres.aut","w");
 FILE *f5=fopen("minimi.aut","w");
 //***********dimension 1*****************************
 //minabs=10000000000000;
-  	for (i=0;i<=settings[9];i++)
+//printf("connect[8] %d",connectactive[1][8]);
+ 	for (i=0;i<=settings[9];i++)
 	{ 	
 		for(j=0;j<=10;j++)
 		{
