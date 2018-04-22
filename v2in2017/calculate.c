@@ -1157,18 +1157,23 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
           metricaconif=0;
           for (ibeg=begintif[v][contatoreif];ibeg<=endintif[v][contatoreif];ibeg++)
           {
+          	 metricaconif=0;
                        for (contdim=1;contdim<=dim;contdim++)
-                      {
+                      {   
+                          
                           metricaconif=metricaconif+(x[v][contdim]-x[ibeg][contdim])*(x[v][contdim]-x[ibeg][contdim]);
-                                }                                                                       
-                      if (sqrt(metricaconif)<distif[v][contatoreif])
+                                }    
+						//printf("valmet %f and %f",sqrt(metricaconif),distif[v][contatoreif]);		                                                                   
+                      if ((sqrt(metricaconif)<distif[v][contatoreif]) && (v!=ibeg))
                       {
-                            fixed[v]=1;                                            
+                            fixed[v]=1;
+							//fixed[ibeg]=1;
+							//printf("fixed\n");                                            
                 }
            }          
   contatoreif++;
 }
- 	if (1==1) 
+ 	if (settings[13]==1) 
 	{
  		casual=rand()%1000;
 		flotcasual=casual*somprob/1000.0;
@@ -1351,6 +1356,9 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 			double lenght[p+3];
 			double r[40];
 			double vers[p][40];
+			if (z==settings[9])
+			{
+			
 			for (l=0;l<=p;l++)
 			{
 			for (s=1;s<=dim;s++)
@@ -1366,33 +1374,37 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 				
 			}
 			
-			for (l=0;l<=p;l++)
+			for (l=1;l<=p;l++)
 			{
 				for (w=1;w<=dim;w++)
 				{
 					lenght[l]=lenght[l]+(x[v][w]-xmov[l][w])*(x[v][w]-xmov[l][w]);
+					printf("xvw %lf,xmov %lf",x[v][w],xmov[l][w]);
 					
 				}
 				lenght[l]=sqrt(lenght[l]);
-			    printf("llll %f",lenght[l]);
+			//	printf("number %d",l);
+			  // printf("llll %lf",lenght[l]);
 				}
-			for (l=0;l<=p;l++)
+			for (l=1;l<=p;l++)
 			{
 				for (w=1;w<=dim;w++)
 				{
 					vers[l][w]=(-x[v][w]+xmov[l][w])*prob[l]/lenght[l];
+					printf("vers %lf",vers[l][w]);
+					printf("length %lf",lenght[l]);
 					
 				}
 				
 				}
 			for (w=1;w<=dim;w++)
 			{
-			for (l=0;l<=p;l++)
+			for (l=1;l<=p;l++)
 			{
 
 				r[w]=r[w]+vers[l][w];
 				}	
-			//printf("rrwwww %f",r[w]);
+			//printf("rrwwww %f",r[1]);
 			}
 			if (z==settings[9])
 			
@@ -1400,10 +1412,12 @@ void seekprob(int np,int n,float dim,double x[][10],double xmov[][10],double pro
 			
 			for (w=1;w<=dim;w++)
 			{
-				x[v][w]=x[v][w]+r[w];
+			
+		    	x[v][w]=x[v][w]+r[w];
 					}		
 			}
 			}
+		}
 			//printf("fine");
  		if ((settings[13]==10000) && (memgredyent<=n))
 	    {
