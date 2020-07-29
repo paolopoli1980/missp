@@ -16,11 +16,14 @@ for i in range(int(gruppi)):
                 
         
 
+track=input("Track yes or no (y/n)=")
+
 from vpython import *
 from time import sleep
 scene = canvas(title='Missp',
      x=0, y=0, width=1366, height=768,
-center=vector(0,0,0), background=vector(1,1,1)) 
+center=vector(0,0,0), background=vector(1,1,1))
+
 f1=open('pos.aut','r')
 stringa='aaa'
 r=float(0.5)
@@ -84,15 +87,25 @@ if dim==2:
                 if (stringa!='*\n'):
                         #print (stringa)
                         #print (stringa2)
-                        if (colore[contatore]=="red"):
-                                point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.red,make_trail=True))
-                        if (colore[contatore]=="green"):
-                                point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.green,make_trail=True))             
-                        if (colore[contatore]=="yellow"):
-                                point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.yellow,make_trail=True))            
-                        if (colore[contatore]=="white"):
-                                point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.white,make_trail=True))             
-
+                        if track=='y':
+                                if (colore[contatore]=="red"):
+                                        point.append(sphere(pos=vec(float(stringa),float(stringa2),float(stringa3)), radius=float(raggio[contatore]), color=color.red,make_trail=True))
+                                if (colore[contatore]=="green"):
+                                        point.append(sphere(pos=vec(float(stringa),float(stringa2),float(stringa3)), radius=float(raggio[contatore]), color=color.green,make_trail=True))             
+                                if (colore[contatore]=="yellow"):
+                                        point.append(sphere(pos=vec(float(stringa),float(stringa2),float(stringa3)), radius=float(raggio[contatore]), color=color.yellow,make_trail=True))            
+                                if (colore[contatore]=="white"):
+                                        point.append(sphere(pos=vec(float(stringa),float(stringa2),float(stringa3)), radius=float(raggio[contatore]), color=color.white,make_trail=True))             
+                        else:
+                                if (colore[contatore]=="red"):
+                                        point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.red,make_trail=False))
+                                if (colore[contatore]=="green"):
+                                        point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.green,make_trail=False))             
+                                if (colore[contatore]=="yellow"):
+                                        point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.yellow,make_trail=False))            
+                                if (colore[contatore]=="white"):
+                                        point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.white,make_trail=False))             
+                                
 
         f1.close()      
         f1=open('posres.aut','r')
@@ -142,15 +155,26 @@ if dim==3:
                         print (stringa)
                         print (stringa2)
                         print (stringa3)
-                        if (colore[contatore]=="red"):
-                                point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.red,make_trail=True))               
-                        if (colore[contatore]=="green"):
-                                point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.green,make_trail=True))             
-                        if (colore[contatore]=="yellow"):
-                                point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.yellow,make_trail=True))            
-                        if (colore[contatore]=="white"):
-                                point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.white,make_trail=True))             
+                        if track=='y':
+                                if (colore[contatore]=="red"):
+                                        point.append(sphere(pos=vec(float(stringa),float(stringa2),float(stringa3)), radius=float(raggio[contatore]), color=color.red,make_trail=True))               
+                                if (colore[contatore]=="green"):
+                                        point.append(sphere(pos=vec(float(stringa),float(stringa2),float(stringa3)), radius=float(raggio[contatore]), color=color.green,make_trail=True))             
+                                if (colore[contatore]=="yellow"):
+                                        point.append(sphere(pos=vec(float(stringa),float(stringa2),float(stringa3)), radius=float(raggio[contatore]), color=color.yellow,make_trail=True))            
+                                if (colore[contatore]=="white"):
+                                        point.append(sphere(pos=vec(float(stringa),float(stringa2),float(stringa3)), radius=float(raggio[contatore]), color=color.white,make_trail=True))             
+                        else:
+                                if (colore[contatore]=="red"):
+                                        point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.red,make_trail=False))
+                                if (colore[contatore]=="green"):
+                                        point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.green,make_trail=False))             
+                                if (colore[contatore]=="yellow"):
+                                        point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.yellow,make_trail=False))            
+                                if (colore[contatore]=="white"):
+                                        point.append(sphere(pos=vec(float(stringa),0,0), radius=float(raggio[contatore]), color=color.white,make_trail=False))             
  
+
 
         f1.close()      
         f1=open('posres.aut','r')
